@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 
-import tokens from '../../../../../utils/tokens'
+import tokens from '../../../../utils/tokens'
 
 const signUp = async (_parent, { username, password, token }, { models }) => {
   const { organizationId, email, roles } = await jwt.verify(

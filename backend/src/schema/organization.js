@@ -14,7 +14,5 @@ export default gql`
     id: ID!
     name: String!
     users: [User]!
-    trackers: [Tracker]!
-    assets: [Asset]!
   }
 `

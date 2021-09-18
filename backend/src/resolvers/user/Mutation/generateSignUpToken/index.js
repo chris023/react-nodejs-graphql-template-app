@@ -1,6 +1,6 @@
 import { ForbiddenError } from 'apollo-server'
 
-import tokens from '../../../../../utils/tokens'
+import tokens from '../../../../utils/tokens'
 
 const validRoles = async (roles, models) =>
   Array.isArray(roles) &&
