@@ -15,11 +15,11 @@ const validRoles = async (roles, models) =>
 const generateSignUpToken = async (
   _parent,
   { email, roles },
-  { models, me },
+  { models, requestor },
 ) => {
   if (await validRoles(roles, models)) {
     return {
-      token: tokens.generateSignUpToken(me.organizationId, email, roles),
+      token: tokens.generateSignUpToken(requestor.organizationId, email, roles),
     }
   } else {
     throw new ForbiddenError('Invalid Roles')

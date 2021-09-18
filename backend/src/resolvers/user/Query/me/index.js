@@ -1,5 +1,5 @@
-const me = async (_parent, _args, { me, models }) => {
-  return await models.User.findByPk(me.id)
+const requestor = async (_parent, _args, { requestor, models }) => {
+  return await models.User.findByPk(requestor.id)
 }
 
-export { me }
+export { requestor }

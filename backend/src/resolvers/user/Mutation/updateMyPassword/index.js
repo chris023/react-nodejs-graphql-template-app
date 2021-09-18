@@ -1,16 +1,16 @@
 const updateMyPassword = async (
   _parent,
   { oldPassword, newPassword },
-  { me, models },
+  { requestor, models },
 ) => {
-  const user = await models.User.findByPk(me.id)
+  const user = await models.User.findByPk(requestor.id)
   const isValidPassword = await user.validatePassword(oldPassword)
   const hashPassword = await user.generateNewPasswordHash(newPassword)
 
   if (isValidPassword) {
     const [_, user] = await models.User.update(
       { password: hashPassword },
-      { where: { id: me.id }, returning: true, plain: true },
+      { where: { id: requestor.id }, returning: true, plain: true },
     )
 
     return user
