@@ -15,6 +15,11 @@ const sequelize = new Sequelize(
 )
 
 /** Aggregate models */
+export interface Models {
+    User: typeof User
+    Business: typeof Business
+}
+
 const models = {
     User,
     Business,

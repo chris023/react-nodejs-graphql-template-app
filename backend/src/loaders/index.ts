@@ -1,5 +1,9 @@
-import DataLoader from "dataloader"
+import DataLoader from 'dataloader'
 
-const createLoaders = () => ({})
+export interface Loaders {}
+
+type CreateLoaders = () => Loaders
+
+const createLoaders: CreateLoaders = () => ({})
 
 export { createLoaders }
