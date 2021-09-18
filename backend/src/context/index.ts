@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
 import { ContextFunction } from "apollo-server-core"
 
-import models from "../models"
-import { createLoaders } from "../loaders"
+import { models } from "models"
+import { createLoaders } from "loaders"
 
 const getRequestor = async (req: any) => {
   const token = req.headers["x-token"]
