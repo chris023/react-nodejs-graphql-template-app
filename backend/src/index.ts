@@ -35,7 +35,7 @@ const setup = async () => {
 
   // Start server
   app.listen({ port: process.env.PORT }, () => {
-    console.log(`Apollo Server on http://<url>:${process.env.PORT}/graphql`)
+    console.log(`⚡️[server]: Apollo Server on http://<url>:${process.env.PORT}/graphql`)
   })
 }
 
