@@ -1,22 +1,23 @@
-import { gql } from "apollo-server-express"
+import { gql } from 'apollo-server-express'
 
-import organizationSchema from "./organization"
-import userSchema from "./user"
+import business from './business'
+import user from './user'
 
+/** Generates the basic types to extend our schema from */
 const baseSchema = gql`
-  scalar DateTime
+    scalar DateTime
 
-  type Query {
-    _: Boolean
-  }
-  type Mutation {
-    _: Boolean
-  }
-  type Subscription {
-    _: Boolean
-  }
+    type Query {
+        _: Boolean
+    }
+    type Mutation {
+        _: Boolean
+    }
+    type Subscription {
+        _: Boolean
+    }
 `
-
-const schema = [baseSchema, organizationSchema, userSchema]
+/** Stitches schemas together */
+const schema = [baseSchema, business, user]
 
 export default schema
