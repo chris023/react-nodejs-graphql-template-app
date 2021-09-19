@@ -5,23 +5,23 @@ import { deleteUser } from './deleteUser'
 import { generateSignUpToken } from './generateSignUpToken'
 import { signIn } from './signIn'
 import { signUp } from './signUp'
-import { updateMe } from './updateMe'
-import { updateMyPassword } from './updateMyPassword'
+import { updateMe } from './updateUser'
+import { updateMyPassword } from './changePassword'
 
 import { isAuthenticated, isAdmin } from '../../authorization'
 
 const Mutation = {
-  attemptTokenRefresh,
-  deleteUser: combineResolvers(isAuthenticated, isAdmin, deleteUser),
-  generateSignUpToken: combineResolvers(
-    isAuthenticated,
-    isAdmin,
-    generateSignUpToken,
-  ),
-  signIn,
-  signUp,
-  updateMe: combineResolvers(isAuthenticated, updateMe),
-  updateMyPassword: combineResolvers(isAuthenticated, updateMyPassword),
+    attemptTokenRefresh,
+    deleteUser: combineResolvers(isAuthenticated, isAdmin, deleteUser),
+    generateSignUpToken: combineResolvers(
+        isAuthenticated,
+        isAdmin,
+        generateSignUpToken
+    ),
+    signIn,
+    signUp,
+    updateMe: combineResolvers(isAuthenticated, updateMe),
+    updateMyPassword: combineResolvers(isAuthenticated, updateMyPassword),
 }
 
 export { Mutation }

@@ -16,9 +16,6 @@ export interface UserAttributes {
     email: string
     password: string | null
     timezone: string
-
-    /** Foreign relationships */
-    businessId: number
 }
 
 /** Model Definition */
