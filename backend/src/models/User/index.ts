@@ -4,18 +4,24 @@ import { InitOptions, Model, Optional } from 'sequelize'
 import { models, sequelize } from 'models'
 
 import { columns } from './columns'
+import { UUIDV4 } from 'utils'
 
 const config: InitOptions<User> = {
     tableName: 'users',
     sequelize,
 }
 
+export type UserRole = 'user' | 'admin'
+
 export interface UserAttributes {
-    id: number
-    username: string
+    id: UUIDV4
     email: string
     password: string | null
+    roles: UserRole[]
     timezone: string
+
+    /** Foreign relationships */
+    businessId: UUIDV4
 }
 
 /** Model Definition */
@@ -23,14 +29,14 @@ export class User
     extends Model<UserAttributes, Optional<UserAttributes, 'id'>>
     implements UserAttributes
 {
-    id!: number
-    username!: string
+    roles!: UserRole[]
+    id!: UUIDV4
     email!: string
     password!: string | null
     timezone!: string
 
     /** Foreign relationships */
-    businessId!: number
+    businessId!: UUIDV4
 
     /** PostgreSQL default columns */
     public readonly createdAt!: Date

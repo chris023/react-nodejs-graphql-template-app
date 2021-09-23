@@ -1,11 +1,13 @@
 import { Query } from './Query'
 import { Mutation } from './Mutation'
-import * as User from './User'
+import { business } from './fields'
 
 const userResolvers = {
-  Query,
-  Mutation,
-  User,
+    Query,
+    Mutation,
+    User: {
+        business,
+    },
 }
 
 export { userResolvers }

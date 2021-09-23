@@ -1,5 +1,7 @@
-export * from './changePassword'
-export * from './createRegistrationToken'
-export * from './login'
-export * from './refreshToken'
-export * from './register'
+import { Mutation } from './Mutation'
+
+const authenticationResolvers = {
+    Mutation,
+}
+
+export { authenticationResolvers }

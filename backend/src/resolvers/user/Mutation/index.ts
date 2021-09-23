@@ -1,27 +1,13 @@
 import { combineResolvers } from 'graphql-resolvers'
 
-import { attemptTokenRefresh } from './attemptTokenRefresh'
 import { deleteUser } from './deleteUser'
-import { generateSignUpToken } from './generateSignUpToken'
-import { signIn } from './signIn'
-import { signUp } from './signUp'
-import { updateMe } from './updateUser'
-import { updateMyPassword } from './changePassword'
+import { updateUser } from './updateUser'
 
-import { isAuthenticated, isAdmin } from '../../authorization'
+import { isAuthenticated, isAdmin } from 'resolvers/authorization'
 
 const Mutation = {
-    attemptTokenRefresh,
     deleteUser: combineResolvers(isAuthenticated, isAdmin, deleteUser),
-    generateSignUpToken: combineResolvers(
-        isAuthenticated,
-        isAdmin,
-        generateSignUpToken
-    ),
-    signIn,
-    signUp,
-    updateMe: combineResolvers(isAuthenticated, updateMe),
-    updateMyPassword: combineResolvers(isAuthenticated, updateMyPassword),
+    updateMe: combineResolvers(isAuthenticated, updateUser),
 }
 
 export { Mutation }

@@ -1,15 +1,15 @@
 import { combineResolvers } from 'graphql-resolvers'
 
-import { requestor } from './requestor'
+import { getMe } from './getMe'
 import { user } from './user'
 import { users } from './users'
 
 import { isAuthenticated } from '../../authorization'
 
 const Query = {
-  requestor: combineResolvers(isAuthenticated, requestor),
-  user: combineResolvers(isAuthenticated, user),
-  users: combineResolvers(isAuthenticated, users),
+    getMe: combineResolvers(isAuthenticated, getMe),
+    user: combineResolvers(isAuthenticated, user),
+    users: combineResolvers(isAuthenticated, users),
 }
 
 export { Query }

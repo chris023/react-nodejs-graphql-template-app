@@ -19,9 +19,11 @@ export class Business
     extends Model<BusinessAttributes, Optional<BusinessAttributes, 'id'>>
     implements BusinessAttributes
 {
+    /** Columns */
     id!: number
     name!: string
 
+    /** Association helper */
     associate!: () => void
 }
 
