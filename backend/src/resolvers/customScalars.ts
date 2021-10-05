@@ -1,7 +1,7 @@
-import { GraphQLDateTime } from "graphql-iso-date"
+import { resolvers as graphqlScalarsResolvers } from 'graphql-scalars'
 
 const customScalars = {
-  DateTime: GraphQLDateTime,
+    ...graphqlScalarsResolvers,
 }
 
 export { customScalars }

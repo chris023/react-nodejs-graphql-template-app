@@ -5,20 +5,13 @@ import { MutationResolvers } from 'types'
 /**
  * Generates a registration token for invite only signup flows
  */
-// @ts-ignore
-const createRegistrationToken: MutationResolvers['createRegistrationToken'] = (
-    _parent,
-    { email, roles },
-    { requestor }
-) => {
-    if (!requestor) {
-        throw new AuthenticationError('Error authenticating user')
-    }
+const createRegistrationToken: MutationResolvers['createRegistrationToken'] =
+    async (_parent, { email, roles }, { requestor }) => {
+        if (!requestor) {
+            throw new AuthenticationError('Error authenticating user')
+        }
 
-    return {
-        // @ts-ignore
-        token: create({ businessId: requestor.businessId, email, roles }),
+        return create({ businessId: requestor.businessId, email, roles })
     }
-}
 
 export { createRegistrationToken }

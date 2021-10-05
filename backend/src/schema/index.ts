@@ -1,5 +1,6 @@
 import { gql } from 'apollo-server-express'
 import { makeExecutableSchema } from '@graphql-tools/schema'
+import { typeDefs as graphqlScalarsTypeDefs } from 'graphql-scalars'
 
 import authenticationDefs from './authentication'
 import businessDefs from './business'
@@ -9,8 +10,6 @@ import * as resolvers from '../resolvers'
 
 /** Generates the basic types to extend our schema from */
 const baseDefs = gql`
-    scalar DateTime
-
     type Query {
         _: Boolean
     }
@@ -24,7 +23,13 @@ const baseDefs = gql`
     }
 `
 /** This allows the schema to be stitched together */
-const typeDefs = [baseDefs, authenticationDefs, businessDefs, userDefs]
+const typeDefs = [
+    ...graphqlScalarsTypeDefs,
+    baseDefs,
+    authenticationDefs,
+    businessDefs,
+    userDefs,
+]
 
 export const schema = makeExecutableSchema({
     typeDefs,

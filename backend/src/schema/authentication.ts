@@ -3,10 +3,18 @@ import { gql } from 'apollo-server-express'
 export default gql`
     extend type Mutation {
         changePassword(newPassword: String!, oldPassword: String!): User!
-        createRegistrationToken(email: Email!, roles: [String!]!): AuthTokens!
-        login(email: String!, password: String!): LoginResponse!
-        refreshTokens(refreshToken: String!): LoginResponse!
-        register: LoginResponse!
+        createRegistrationToken(
+            email: EmailAddress!
+            roles: [UserRole!]!
+        ): AuthTokens!
+        login(email: EmailAddress!, password: String!): LoginResponse!
+        refreshTokens(refreshToken: String!): AuthTokens!
+        register(
+            email: EmailAddress!
+            password: String!
+            timezone: String!
+            registrationToken: JWT!
+        ): LoginResponse!
     }
 
     type LoginResponse {
@@ -15,7 +23,7 @@ export default gql`
     }
 
     type AuthTokens {
-        accessToken: String!
-        refreshToken: String!
+        accessToken: JWT!
+        refreshToken: JWT!
     }
 `

@@ -1,32 +1,12 @@
 import jwt from 'jsonwebtoken'
 
-import {
-    createLoginTokens,
-    JsonWebToken,
-    RegistrationTokenPayload,
-} from 'utils/tokens'
-import { IFieldResolver } from 'graphql-resolvers'
-import { Context } from 'context'
-import { ILoginResponse } from './login'
-
-interface IArgs {
-    email: string
-    password: string
-    timezone: string
-    registrationToken: JsonWebToken
-}
-
-type IRegisterResponse = ILoginResponse
+import { createLoginTokens, RegistrationTokenPayload } from 'utils/tokens'
+import { MutationResolvers } from 'types'
 
 /**
  * Function used to register new users.  A registration token is required to create a new account
  */
-const register: IFieldResolver<
-    undefined,
-    Context,
-    IArgs,
-    Promise<IRegisterResponse>
-> = async (
+const register: MutationResolvers['register'] = async (
     _parent,
     { email, password, timezone, registrationToken },
     { models }

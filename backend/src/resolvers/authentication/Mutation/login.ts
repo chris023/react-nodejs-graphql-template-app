@@ -1,29 +1,15 @@
 import { AuthenticationError } from 'apollo-server'
 
-import { IFieldResolver } from 'graphql-resolvers'
-import { Context } from 'context'
-import { createLoginTokens, LoginTokens } from 'utils/tokens'
-import { User } from 'models/User'
-
-interface IArgs {
-    email: string
-    password: string
-}
-
-export interface ILoginResponse {
-    user: User
-    tokens: LoginTokens
-}
-
+import { createLoginTokens } from 'utils/tokens'
+import { MutationResolvers } from 'types'
 /**
  * Function used to authenticate and log in users by email and password
  */
-const login: IFieldResolver<
-    undefined,
-    Context,
-    IArgs,
-    Promise<ILoginResponse>
-> = async (_parent, { email, password }, { models }) => {
+const login: MutationResolvers['login'] = async (
+    _parent,
+    { email, password },
+    { models }
+) => {
     const user = await models.User.findOne({ where: { email } })
 
     if (user) {

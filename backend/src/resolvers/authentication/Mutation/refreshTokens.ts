@@ -1,6 +1,5 @@
 import { refreshTokens as refresh, JsonWebToken } from 'utils/tokens'
-import { IFieldResolver } from 'graphql-resolvers'
-import { Context } from 'context'
+import { MutationResolvers } from 'types'
 
 interface IArgs {
     refreshToken: JsonWebToken
@@ -10,12 +9,12 @@ interface IArgs {
  * Generates a new pair of tokens for authentication given an existing
  * refresh token.
  */
-const refreshTokens: IFieldResolver<undefined, Context, IArgs> = async (
+const refreshTokens: MutationResolvers['refreshTokens'] = async (
     _parent,
     { refreshToken },
     _context
 ) => {
-    return { tokens: refresh(refreshToken) }
+    return refresh(refreshToken)
 }
 
 export { refreshTokens }
