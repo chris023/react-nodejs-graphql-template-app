@@ -4,37 +4,24 @@ export default gql`
     extend type Query {
         user(id: ID!): User
         users: [User!]
-        requestor: User
+        getMe: User!
     }
 
     extend type Mutation {
-        signUp(username: String!, password: String!, token: String!): Tokens!
-        signIn(login: String!, password: String!): Tokens!
-        generateSignUpToken(email: String!, roles: [String]!): SignUpToken!
         deleteUser(id: ID!): Boolean!
-        attemptTokenRefresh(refreshToken: String!): AccessToken!
-        updateMe(username: String, email: String, timezone: String): User!
-        updateMyPassword(oldPassword: String!, newPassword: String!): User!
+        updateUser(email: String, timezone: String): User!
     }
 
-    type AccessToken {
-        token: String!
-    }
-
-    type SignUpToken {
-        token: String!
-    }
-
-    type Tokens {
-        accessToken: String!
-        refreshToken: String!
+    enum UserRole {
+        admin
+        user
     }
 
     type User {
         id: ID!
         username: String!
         email: String!
-        roles: [String]!
+        roles: [UserRole]!
         business: Business!
         timezone: String
     }

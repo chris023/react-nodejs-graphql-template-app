@@ -1,9 +1,9 @@
 import jwt from 'jsonwebtoken'
 import { ContextFunction } from 'apollo-server-core'
 
-import { models, Models } from 'models'
+import { Models } from 'models'
 import { createLoaders, Loaders } from 'loaders'
-import { AccessToken } from 'utils'
+import { AccessTokenPayload } from 'utils'
 
 const getRequestor = async (req: any) => {
     const token = req.headers['x-token']
@@ -13,7 +13,7 @@ const getRequestor = async (req: any) => {
             return (await jwt.verify(
                 token,
                 process.env.ACCESS_TOKEN_SECRET!
-            )) as AccessToken
+            )) as AccessTokenPayload
         } catch (e) {
             return null
         }
@@ -23,7 +23,7 @@ const getRequestor = async (req: any) => {
 }
 
 export interface Context {
-    requestor: AccessToken | null
+    requestor: AccessTokenPayload | null
     models: Models
     loaders: Loaders
 }
@@ -34,7 +34,7 @@ const context: ContextFunction<any, Context> = async ({ req }) => {
 
     return {
         requestor,
-        models,
+        models: {} as Models,
         loaders,
     }
 }

@@ -1,33 +1,38 @@
 import bcrypt from 'bcryptjs'
-import { InitOptions, Model, Optional } from 'sequelize'
+import { Model, Optional, Sequelize } from 'sequelize'
 
-import { models, sequelize } from 'models'
+import { models } from 'models'
 
 import { columns } from './columns'
 import { UUIDV4 } from 'utils'
 
-const config: InitOptions<User> = {
-    tableName: 'users',
-    sequelize,
-}
-
 export type UserRole = 'user' | 'admin'
 
-export interface UserAttributes {
+export interface UserBaseAttributes {
     id: UUIDV4
     email: string
     password: string | null
     roles: UserRole[]
     timezone: string
+}
 
+export interface UserForeignAttributes {
     /** Foreign relationships */
     businessId: UUIDV4
+}
+
+export interface UserAttributes
+    extends UserBaseAttributes,
+        UserForeignAttributes {}
+
+export interface UserCustomMethods {
+    setup: (sequelize: Sequelize) => void
 }
 
 /** Model Definition */
 export class User
     extends Model<UserAttributes, Optional<UserAttributes, 'id'>>
-    implements UserAttributes
+    implements UserAttributes, UserCustomMethods
 {
     roles!: UserRole[]
     id!: UUIDV4
@@ -48,18 +53,22 @@ export class User
     validatePassword!: (password: string) => Promise<boolean>
 
     /** Association helper */
-    associate!: () => void
+    setup = (sequelize: Sequelize) => {
+        User.init(columns as any, {
+            tableName: 'users',
+            sequelize,
+        })
+    }
 }
 
 /** Associations */
-;(User as any).associate = () => {
-    User.belongsTo(models.Business)
-}
+User.belongsTo(models.Business)
 
 /** Side Effects */
-User.beforeCreate(async (user) => {
-    user.password = await user.generatePasswordHash()
-})
+/** TODO: Fix this */
+// User.beforeCreate(async (user) => {
+//     user.password = await user.generatePasswordHash()
+// })
 
 /** Instance Methods */
 User.prototype.generatePasswordHash = async function () {
@@ -75,6 +84,3 @@ User.prototype.generateNewPasswordHash = async (newPassword) => {
 User.prototype.validatePassword = async function (password) {
     return await bcrypt.compare(password, this.password!)
 }
-
-/** Initialize */
-User.init(columns, config)

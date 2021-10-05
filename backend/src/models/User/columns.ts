@@ -1,24 +1,16 @@
 import { DataTypes, ModelAttributes } from 'sequelize'
 
-import { User, UserAttributes, UserRole } from './'
+import { User, UserBaseAttributes, UserRole } from './'
 
 const roles: UserRole[] = ['user', 'admin']
 
-const columns: ModelAttributes<User, UserAttributes> = {
+const columns: ModelAttributes<User, UserBaseAttributes> = {
     id: {
         primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         unique: true,
-    },
-    username: {
-        type: DataTypes.STRING,
-        unique: true,
-        allowNull: false,
-        validate: {
-            notEmpty: true,
-        },
     },
     email: {
         type: DataTypes.STRING,

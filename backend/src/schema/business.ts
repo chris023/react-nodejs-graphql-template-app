@@ -7,7 +7,7 @@ export default gql`
     }
 
     extend type Mutation {
-        createOrganization(name: String!): Business!
+        createBusiness(name: String!): Business!
     }
 
     type Business {

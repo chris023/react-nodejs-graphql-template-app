@@ -6,6 +6,10 @@ interface IArgs {
     refreshToken: JsonWebToken
 }
 
+/**
+ * Generates a new pair of tokens for authentication given an existing
+ * refresh token.
+ */
 const refreshTokens: IFieldResolver<undefined, Context, IArgs> = async (
     _parent,
     { refreshToken },

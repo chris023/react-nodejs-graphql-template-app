@@ -1,9 +1,9 @@
-import { UserRole } from 'models/User'
 import { JsonWebToken, tokenExpirationLimits, UUIDV4 } from 'utils'
 import jwt from 'jsonwebtoken'
+import { Scalars, UserRole } from 'types'
 
 export interface RegistrationTokenPayload {
-    businessId: UUIDV4
+    businessId: Scalars['ID']
     email: string
     roles: UserRole[]
 }

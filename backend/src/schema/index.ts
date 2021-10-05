@@ -1,23 +1,35 @@
 import { gql } from 'apollo-server-express'
+import { makeExecutableSchema } from '@graphql-tools/schema'
 
-import business from './business'
-import user from './user'
+import authenticationDefs from './authentication'
+import businessDefs from './business'
+import userDefs from './user'
+
+import * as resolvers from '../resolvers'
 
 /** Generates the basic types to extend our schema from */
-const baseSchema = gql`
+const baseDefs = gql`
     scalar DateTime
 
     type Query {
         _: Boolean
     }
+
     type Mutation {
         _: Boolean
     }
+
     type Subscription {
         _: Boolean
     }
 `
-/** Stitches schemas together */
-const schema = [baseSchema, business, user]
+/** This allows the schema to be stitched together */
+const typeDefs = [baseDefs, authenticationDefs, businessDefs, userDefs]
 
-export default schema
+export const schema = makeExecutableSchema({
+    typeDefs,
+    /** TODO: fix type  */
+    resolvers: Object.values(resolvers) as any,
+})
+
+export { typeDefs }

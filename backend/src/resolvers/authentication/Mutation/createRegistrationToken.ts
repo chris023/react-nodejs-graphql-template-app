@@ -1,24 +1,24 @@
-import { IFieldResolver } from 'graphql-resolvers'
-import { Context } from 'context'
-import { UserRole } from 'models/User'
 import { createRegistrationToken as create, JsonWebToken } from 'utils'
+import { AuthenticationError } from 'apollo-server-errors'
+import { MutationResolvers } from 'types'
 
-interface IArgs {
-    email: string
-    roles: UserRole[]
+/**
+ * Generates a registration token for invite only signup flows
+ */
+// @ts-ignore
+const createRegistrationToken: MutationResolvers['createRegistrationToken'] = (
+    _parent,
+    { email, roles },
+    { requestor }
+) => {
+    if (!requestor) {
+        throw new AuthenticationError('Error authenticating user')
+    }
+
+    return {
+        // @ts-ignore
+        token: create({ businessId: requestor.businessId, email, roles }),
+    }
 }
-
-interface IResponse {
-    token: JsonWebToken
-}
-
-const createRegistrationToken: IFieldResolver<
-    undefined,
-    Context,
-    IArgs,
-    IResponse
-> = (_parent, { email, roles }, { requestor }) => ({
-    token: create({ businessId: requestor.businessId, email, roles }),
-})
 
 export { createRegistrationToken }

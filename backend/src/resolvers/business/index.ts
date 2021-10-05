@@ -8,8 +8,8 @@ import { users } from './fields'
 
 const businessResolvers = {
     Query: {
-        organization: combineResolvers(isAuthenticated, business),
-        organizations: combineResolvers(isAuthenticated, businesses),
+        business: combineResolvers(isAuthenticated, business),
+        businesses: combineResolvers(isAuthenticated, businesses),
     },
     Mutation: {
         createBusiness: combineResolvers(isAuthenticated, createBusiness),

@@ -3,33 +3,43 @@ import { Sequelize } from 'sequelize'
 import { User } from './User'
 import { Business } from './Business'
 
-/** Create a sequelize isntance */
-const sequelize = new Sequelize(
-    process.env.DATABASE_NAME!,
-    process.env.DATABASE_USER!,
-    process.env.DATABASE_PASSWORD!,
-    {
-        host: process.env.DATABASE_URL!,
-        dialect: 'postgres',
-    }
-)
-
-/** Aggregate models */
 export interface Models {
     User: typeof User
     Business: typeof Business
 }
 
-const models = {
+let sequelize: Sequelize
+
+/** Aggregate models */
+const models: Models = {
     User,
     Business,
 }
 
-/** Link model associations */
-Object.keys(models).forEach((key) => {
-    if ('associate' in (models as any)[key]) {
-        ;(models as any)[key].associate(models)
-    }
-})
+if (
+    process.env.DATABASE_NAME &&
+    process.env.DATABASE_USER &&
+    process.env.DATABASE_PASSWORD &&
+    process.env.DATABASE_URL
+) {
+    /** Create a sequelize isntance */
+    sequelize = new Sequelize(
+        process.env.DATABASE_NAME,
+        process.env.DATABASE_USER,
+        process.env.DATABASE_PASSWORD,
+        {
+            host: process.env.DATABASE_URL,
+            dialect: 'postgres',
+        }
+    )
+
+    Object.keys(models).forEach((key) => {
+        if ('setup' in models[key as keyof Models]) {
+            models[key as keyof Models].setup(sequelize)
+        }
+    })
+} else {
+    throw new Error('Missing database environment variables')
+}
 
 export { models, sequelize }

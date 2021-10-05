@@ -1,0 +1,16 @@
+schema:
+    - './src/schema/index.ts':
+          noPluck: true
+generates:
+    ./src/types/codegen.ts:
+        plugins:
+            - add:
+                  content:
+                      - '/**** THIS FILE IS GENERATED, DO NOT EDIT! ****/'
+            - typescript
+            - typescript-operations
+            - typescript-resolvers
+        config:
+            reactApolloVersion: 3
+require:
+    - ts-node/register

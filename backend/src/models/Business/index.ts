@@ -1,13 +1,8 @@
-import { InitOptions, Model, Optional } from 'sequelize'
+import { Model, Optional, Sequelize } from 'sequelize'
 
-import { models, sequelize } from 'models'
+import { models } from 'models'
 
 import { columns } from './columns'
-
-const config: InitOptions<Business> = {
-    tableName: 'businesses',
-    sequelize,
-}
 
 export interface BusinessAttributes {
     id: number
@@ -33,4 +28,8 @@ export class Business
 }
 
 /** Initialize */
-Business.init(columns, config)
+;(Business as any).setup = (sequelize: Sequelize) =>
+    Business.init(columns, {
+        tableName: 'businesses',
+        sequelize,
+    })

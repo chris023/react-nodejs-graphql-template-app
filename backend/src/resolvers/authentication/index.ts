@@ -1,7 +1,19 @@
-import { Mutation } from './Mutation'
+import {
+    changePassword,
+    createRegistrationToken,
+    login,
+    refreshTokens,
+    register,
+} from './Mutation'
 
 const authenticationResolvers = {
-    Mutation,
+    Mutation: {
+        changePassword,
+        createRegistrationToken,
+        login,
+        refreshTokens,
+        register,
+    },
 }
 
 export { authenticationResolvers }

@@ -16,7 +16,7 @@ export interface ILoginResponse {
 }
 
 /**
- * Function used to authenticate and log in users
+ * Function used to authenticate and log in users by email and password
  */
 const login: IFieldResolver<
     undefined,
