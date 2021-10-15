@@ -39,6 +39,7 @@
         "typescript": "^4.4.3"
     },
     "dependencies": {
+        "@graphql-tools/schema": "^8.2.0",
         "@graphql-tools/utils": "^8.2.3",
         "@types/graphql-iso-date": "^3.4.0",
         "apollo-server": "^3.3.0",

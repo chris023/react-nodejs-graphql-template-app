@@ -8,16 +8,10 @@ import { MutationResolvers } from 'types'
 const changePassword: MutationResolvers['changePassword'] = async (
     _parent,
     { oldPassword, newPassword },
-    { requestor, models }
+    { user, models }
 ) => {
-    if (!requestor) {
-        throw new AuthenticationError('Missing requestor')
-    }
-
-    const user = await models.User.findByPk(requestor.id)
-
     if (!user) {
-        throw new Error('Invalid User')
+        throw new AuthenticationError('Missing user')
     }
 
     const isValidPassword = await user.validatePassword(oldPassword)
@@ -30,7 +24,7 @@ const changePassword: MutationResolvers['changePassword'] = async (
     const [_, updatedUser] = await models.User.update(
         { password: hashPassword },
         {
-            where: { id: requestor.id },
+            where: { id: user.id },
             returning: true,
         }
     )

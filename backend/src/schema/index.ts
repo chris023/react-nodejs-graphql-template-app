@@ -6,6 +6,8 @@ import authenticationDefs from './authentication'
 import businessDefs from './business'
 import userDefs from './user'
 
+import { authDirectiveTypeDefs, authDirectiveTransformer } from './directives'
+
 import * as resolvers from '../resolvers'
 
 /** Generates the basic types to extend our schema from */
@@ -25,16 +27,23 @@ const baseDefs = gql`
 /** This allows the schema to be stitched together */
 const typeDefs = [
     ...graphqlScalarsTypeDefs,
+    authDirectiveTypeDefs,
     baseDefs,
     authenticationDefs,
     businessDefs,
     userDefs,
 ]
 
-export const schema = makeExecutableSchema({
-    typeDefs,
-    /** TODO: fix type  */
-    resolvers: Object.values(resolvers) as any,
-})
+const transformers = [authDirectiveTransformer]
+
+export const schema = transformers.reduce(
+    (schema, transformerFn) => {
+        return transformerFn(schema)
+    },
+    makeExecutableSchema({
+        typeDefs,
+        resolvers: Object.values(resolvers),
+    })
+)
 
 export { typeDefs }

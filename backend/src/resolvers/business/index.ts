@@ -2,7 +2,7 @@ import { combineResolvers } from 'graphql-resolvers'
 
 import { isAuthenticated } from 'resolvers/authorization'
 
-import { business, businesses } from './Query'
+import * as Query from './Query'
 import { createBusiness } from './Mutation'
 import { users } from './fields'
 
