@@ -257,6 +257,7 @@ export type QueryUserArgs = {
 
 export enum Role {
   Admin = 'admin',
+  SiteAdmin = 'siteAdmin',
   User = 'user'
 }
 

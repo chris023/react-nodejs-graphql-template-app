@@ -8,6 +8,7 @@ export const authDirectiveTypeDefs = gql`
     directive @auth(requires: Role = admin) on OBJECT | FIELD_DEFINITION
 
     enum Role {
+        siteAdmin
         admin
         user
     }
@@ -56,7 +57,7 @@ export const authDirectiveTransformer = (schema: GraphQLSchema) =>
         },
     })
 
-export const roles = ['user', 'admin']
+export const roles = ['user', 'admin', 'superadmin']
 
 const hasRole = (user: any, requiredRole: string) => {
     const userRoleLevel = roles.indexOf(user.role)
