@@ -9,17 +9,13 @@ const updateUser: IFieldResolver<
     Context,
     Optional<UserAttributes, 'id'>,
     Promise<User>
-> = async (_parent, { email, timezone }, { requestor, models }) => {
-    if (!requestor) {
-        throw new AuthenticationError('Missing requestor')
-    }
+> = async (_parent, args, { user, models }) => {
+    const [_, [updatedUser]] = await models.User.update(args, {
+        where: { id: user!.id },
+        returning: true,
+    })
 
-    const [_, [user]] = await models.User.update(
-        { email, timezone },
-        { where: { id: requestor.id }, returning: true }
-    )
-
-    return user
+    return updatedUser
 }
 
 export { updateUser }

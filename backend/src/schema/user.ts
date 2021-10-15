@@ -2,9 +2,9 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
     extend type Query {
-        user(id: ID!): User
-        users: [User!]
-        getMe: User!
+        user(id: ID!): User @auth(requires: admin)
+        users: [User!] @auth(requires: admin)
+        getSelf: User! @auth(requires: user)
     }
 
     extend type Mutation {

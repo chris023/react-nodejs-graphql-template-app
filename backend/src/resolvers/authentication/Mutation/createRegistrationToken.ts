@@ -1,5 +1,4 @@
-import { createRegistrationToken as create, JsonWebToken } from 'utils'
-import { AuthenticationError } from 'apollo-server-errors'
+import { createRegistrationToken as create } from 'utils'
 import { MutationResolvers } from 'types'
 
 /**
@@ -7,10 +6,6 @@ import { MutationResolvers } from 'types'
  */
 const createRegistrationToken: MutationResolvers['createRegistrationToken'] =
     async (_parent, { email, roles }, { requestor }) => {
-        if (!requestor) {
-            throw new AuthenticationError('Error authenticating user')
-        }
-
         return create({ businessId: requestor.businessId, email, roles })
     }
 

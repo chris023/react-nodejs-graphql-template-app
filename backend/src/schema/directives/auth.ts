@@ -5,11 +5,11 @@ import { gql } from 'graphql-tag'
 const typeDirectiveArgumentMaps: Record<string, any> = {}
 
 export const authDirectiveTypeDefs = gql`
-    directive @auth(requires: Role = ADMIN) on OBJECT | FIELD_DEFINITION
+    directive @auth(requires: Role = admin) on OBJECT | FIELD_DEFINITION
 
     enum Role {
-        ADMIN
-        USER
+        admin
+        user
     }
 `
 
@@ -56,7 +56,7 @@ export const authDirectiveTransformer = (schema: GraphQLSchema) =>
         },
     })
 
-const roles = ['USER', 'ADMIN']
+export const roles = ['user', 'admin']
 
 const hasRole = (user: any, requiredRole: string) => {
     const userRoleLevel = roles.indexOf(user.role)

@@ -1,4 +1,5 @@
-const generateHTML = ({ organization, link }) => `<html
+// @ts-ignore
+const generateHTML = ({ business, link }) => `<html
 xmlns="https://www.w3.org/1999/xhtml"
 xmlns:v="urn:schemas-microsoft-com:vml"
 xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -236,7 +237,7 @@ xmlns:o="urn:schemas-microsoft-com:office:office"
                           valign="top"
                           align="center"
                         >
-                          Click below to view the files ${organization.name}
+                          Click below to view the files ${business.name}
                           has shared with you.
                         </td>
                       </tr>

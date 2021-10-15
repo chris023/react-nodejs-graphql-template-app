@@ -240,7 +240,7 @@ export type Query = {
   _?: Maybe<Scalars['Boolean']>;
   business: Business;
   businesses: Array<Maybe<Business>>;
-  getMe: User;
+  getSelf: User;
   user?: Maybe<User>;
   users?: Maybe<Array<User>>;
 };
@@ -254,6 +254,11 @@ export type QueryBusinessArgs = {
 export type QueryUserArgs = {
   id: Scalars['ID'];
 };
+
+export enum Role {
+  Admin = 'admin',
+  User = 'user'
+}
 
 export type Subscription = {
   __typename?: 'Subscription';
@@ -393,6 +398,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
+  Role: Role;
   SafeInt: ResolverTypeWrapper<Scalars['SafeInt']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
@@ -474,6 +480,12 @@ export type ResolversParentTypes = {
   UtcOffset: Scalars['UtcOffset'];
   Void: Scalars['Void'];
 };
+
+export type AuthDirectiveArgs = {
+  requires?: Maybe<Role>;
+};
+
+export type AuthDirectiveResolver<Result, Parent, ContextType = any, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
 
 export type AuthTokensResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthTokens'] = ResolversParentTypes['AuthTokens']> = {
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
@@ -670,7 +682,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   _?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   business?: Resolver<ResolversTypes['Business'], ParentType, ContextType, RequireFields<QueryBusinessArgs, 'id'>>;
   businesses?: Resolver<Array<Maybe<ResolversTypes['Business']>>, ParentType, ContextType>;
-  getMe?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  getSelf?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   users?: Resolver<Maybe<Array<ResolversTypes['User']>>, ParentType, ContextType>;
 };
@@ -799,3 +811,6 @@ export type Resolvers<ContextType = any> = {
   Void?: GraphQLScalarType;
 };
 
+export type DirectiveResolvers<ContextType = any> = {
+  auth?: AuthDirectiveResolver<any, any, ContextType>;
+};

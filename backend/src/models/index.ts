@@ -35,6 +35,7 @@ if (
 
     Object.keys(models).forEach((key) => {
         if ('setup' in models[key as keyof Models]) {
+            // @ts-ignore todo: fix
             models[key as keyof Models].setup(sequelize)
         }
     })

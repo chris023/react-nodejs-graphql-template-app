@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
     extend type Query {
-        businesses: [Business]! @isAuthenticated
+        businesses: [Business]!
         business(id: ID!): Business!
     }
 

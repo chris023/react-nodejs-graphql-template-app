@@ -3,6 +3,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
     extend type Mutation {
         changePassword(newPassword: String!, oldPassword: String!): User!
+            @auth(requires: user)
         createRegistrationToken(
             email: EmailAddress!
             roles: [UserRole!]!

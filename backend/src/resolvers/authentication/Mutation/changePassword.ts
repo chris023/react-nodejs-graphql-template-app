@@ -10,10 +10,6 @@ const changePassword: MutationResolvers['changePassword'] = async (
     { oldPassword, newPassword },
     { user, models }
 ) => {
-    if (!user) {
-        throw new AuthenticationError('Missing user')
-    }
-
     const isValidPassword = await user.validatePassword(oldPassword)
     const hashPassword = await user.generateNewPasswordHash(newPassword)
 

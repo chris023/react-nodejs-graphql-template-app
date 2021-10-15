@@ -53,11 +53,11 @@ export class User
     validatePassword!: (password: string) => Promise<boolean>
 
     /** Association helper */
-    setup = (sequelize: Sequelize) => {
-        User.init(columns as any, {
-            tableName: 'users',
-            sequelize,
-        })
+    setup!: (sequelize: Sequelize) => {
+        // User.init(columns, {
+        //     tableName: 'users',
+        //     sequelize,
+        // })
     }
 }
 
