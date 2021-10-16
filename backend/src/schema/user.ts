@@ -2,27 +2,12 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
     extend type Query {
-        user(id: ID!): User @auth(requires: admin)
-        users: [User!] @auth(requires: admin)
-        getSelf: User! @auth(requires: user)
+        user(id: UUID!): User @auth(requires: siteAdmin)
+        users: [User!] @auth(requires: siteAdmin)
     }
 
     extend type Mutation {
-        deleteUser(id: ID!): Boolean!
-        updateUser(email: String, timezone: String): User!
-    }
-
-    enum UserRole {
-        admin
-        user
-    }
-
-    type User {
-        id: ID!
-        username: String!
-        email: String!
-        roles: [UserRole]!
-        business: Business!
-        timezone: String
+        deleteUser(id: UUID!): Boolean! @auth(requires: siteAdmin)
+        updateUser(id: UUID!, email: String, timezone: String): User! @auth(requires(:siteAdmin))
     }
 `

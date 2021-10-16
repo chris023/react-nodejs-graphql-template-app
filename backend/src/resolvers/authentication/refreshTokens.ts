@@ -1,9 +1,5 @@
-import { refreshTokens as refresh, JsonWebToken } from 'utils/tokens'
+import { refreshTokens as refresh } from 'utils/tokens'
 import { MutationResolvers } from 'types'
-
-interface IArgs {
-    refreshToken: JsonWebToken
-}
 
 /**
  * Generates a new pair of tokens for authentication given an existing

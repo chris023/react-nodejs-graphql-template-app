@@ -1,5 +1,4 @@
 import { UserInputError } from 'apollo-server'
-import { AuthenticationError } from 'apollo-server-errors'
 import { MutationResolvers } from 'types'
 
 /**
@@ -11,14 +10,13 @@ const changePassword: MutationResolvers['changePassword'] = async (
     { user, models }
 ) => {
     const isValidPassword = await user.validatePassword(oldPassword)
-    const hashPassword = await user.generateNewPasswordHash(newPassword)
 
     if (!isValidPassword) {
         throw new UserInputError('Old password did not match.')
     }
 
     const [_, updatedUser] = await models.User.update(
-        { password: hashPassword },
+        { password: await user.generateNewPasswordHash(newPassword) },
         {
             where: { id: user.id },
             returning: true,

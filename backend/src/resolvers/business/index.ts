@@ -1,5 +1,12 @@
-import { business, businesses } from './Query'
-import { createBusiness } from './Mutation'
+/** Query resolvers */
+import { business } from './business'
+import { businesses } from './businesses'
+
+/** Mutation resolvers */
+import { createBusiness } from './createBusiness'
+import { updateBusiness } from './updateBusiness'
+
+/** Business field resolvers */
 import { users } from './fields'
 
 const businessResolvers = {
@@ -9,6 +16,7 @@ const businessResolvers = {
     },
     Mutation: {
         createBusiness,
+        updateBusiness,
     },
     Business: {
         users,

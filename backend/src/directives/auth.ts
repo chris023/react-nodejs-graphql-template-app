@@ -2,18 +2,17 @@ import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils'
 import { defaultFieldResolver, GraphQLSchema } from 'graphql'
 import { gql } from 'graphql-tag'
 
+/** All roles that can be assigned to a system user in order of increasing permissions */
+export const roles = ['user', 'admin', 'superadmin']
+
 const typeDirectiveArgumentMaps: Record<string, any> = {}
 
+/** Schema defintions for the auth directive */
 export const authDirectiveTypeDefs = gql`
     directive @auth(requires: Role = admin) on OBJECT | FIELD_DEFINITION
-
-    enum Role {
-        siteAdmin
-        admin
-        user
-    }
 `
 
+/** Transformer function which modifies a schema to support the @auth directive */
 export const authDirectiveTransformer = (schema: GraphQLSchema) =>
     mapSchema(schema, {
         [MapperKind.TYPE]: (type) => {
@@ -57,8 +56,7 @@ export const authDirectiveTransformer = (schema: GraphQLSchema) =>
         },
     })
 
-export const roles = ['user', 'admin', 'superadmin']
-
+/** Helper to compare user's given role to defined list of roles */
 const hasRole = (user: any, requiredRole: string) => {
     const userRoleLevel = roles.indexOf(user.role)
     const requiredRoleLevel = roles.indexOf(requiredRole)

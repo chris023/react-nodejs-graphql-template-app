@@ -1,15 +1,11 @@
-import {
-    changePassword,
-    createRegistrationToken,
-    login,
-    refreshTokens,
-    register,
-} from './Mutation'
+/** Mutation resolvers */
+import { login } from './login'
+import { register } from './register'
+import { refreshTokens } from './refreshTokens'
 
+/** Aggregates all authentication resolvers */
 const authenticationResolvers = {
     Mutation: {
-        changePassword,
-        createRegistrationToken,
         login,
         refreshTokens,
         register,

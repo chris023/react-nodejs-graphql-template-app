@@ -2,6 +2,7 @@ import { AuthenticationError } from 'apollo-server'
 
 import { createLoginTokens } from 'utils/tokens'
 import { MutationResolvers } from 'types'
+
 /**
  * Function used to authenticate and log in users by email and password
  */
