@@ -1,6 +1,6 @@
 import { Context } from 'context'
 import { IFieldResolver } from 'graphql-resolvers'
-import { Business } from 'models/Business'
+import { Business } from 'models/Business.model'
 
 const users: IFieldResolver<Business, Context> = async (
     { id },

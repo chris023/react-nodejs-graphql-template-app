@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken'
 
 import { AccessTokenPayload } from 'utils'
-import { models } from 'models'
-import { User } from 'models/User'
+import { models, UserAttributes } from 'models'
 
-const getUser = async (req: any): Promise<User | null> => {
+const getUser = async (req: any): Promise<UserAttributes | null> => {
     const token = req.headers['x-token']
 
     if (!token) {

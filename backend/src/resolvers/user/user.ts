@@ -1,7 +1,7 @@
 import { IFieldResolver } from 'graphql-resolvers'
 import { Context } from 'context'
 import { UUIDV4 } from 'utils'
-import { User } from 'models/User'
+import { User } from 'models/User.model'
 
 interface IArgs {
     id: UUIDV4

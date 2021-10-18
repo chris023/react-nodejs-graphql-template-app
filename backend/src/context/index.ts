@@ -2,7 +2,7 @@ import { ContextFunction } from 'apollo-server-core'
 
 import { models, Models } from 'models'
 import { createLoaders, Loaders } from 'loaders'
-import { User } from 'models/User'
+import { User } from 'models/User.model'
 
 import { getUser } from './helpers'
 

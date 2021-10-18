@@ -1,7 +1,7 @@
 import { AuthenticationError } from 'apollo-server-errors'
 import { Context } from 'context'
 import { IFieldResolver } from 'graphql-resolvers'
-import { User, UserAttributes } from 'models/User'
+import { User, UserAttributes } from 'models/User.model'
 import { Optional } from 'sequelize/types'
 
 const updateSelf: IFieldResolver<

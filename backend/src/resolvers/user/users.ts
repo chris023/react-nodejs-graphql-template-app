@@ -1,6 +1,6 @@
 import { IFieldResolver } from 'graphql-resolvers'
 import { Context } from 'context'
-import { User } from 'models/User'
+import { User } from 'models/User.model'
 
 const users: IFieldResolver<
     undefined,

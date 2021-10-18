@@ -1,4 +1,4 @@
-import { User, UserRole } from 'models/User'
+import { User, UserRole } from 'models/User.model'
 import { JsonWebToken, UUIDV4, tokenExpirationLimits } from 'utils/tokens'
 import jwt from 'jsonwebtoken'
 
