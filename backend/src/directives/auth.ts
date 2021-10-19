@@ -59,6 +59,10 @@ export const authDirectiveTransformer = (schema: GraphQLSchema) =>
 
 /** Helper to compare user's given role to defined list of roles */
 const hasRole = (user: any, requiredRole: Role) => {
+    if (!user) {
+        return false
+    }
+
     const userRoleLevel = roles.indexOf(user.role)
     const requiredRoleLevel = roles.indexOf(requiredRole)
 
