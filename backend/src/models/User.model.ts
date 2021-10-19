@@ -1,13 +1,13 @@
-import {
-    Table,
-    Column,
-    Model,
-    BelongsTo,
-    ForeignKey,
-    PrimaryKey,
-} from 'sequelize-typescript'
 import { Optional } from 'sequelize/types'
-import { Role, ResolversTypes } from 'types'
+import {
+  BelongsTo,
+  Column,
+  ForeignKey,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript'
+import { ResolversTypes, Role } from 'types'
 
 import { Business } from './Business.model'
 

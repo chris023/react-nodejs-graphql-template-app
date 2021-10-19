@@ -1,7 +1,7 @@
-import { User } from 'models/User.model'
-import { tokenExpirationLimits } from 'utils/tokens'
 import jwt from 'jsonwebtoken'
+import { User } from 'models/User.model'
 import { Role, Scalars } from 'types'
+import { tokenExpirationLimits } from 'utils/tokens'
 
 export interface AccessTokenPayload {
     id: Scalars['UUID']
@@ -13,39 +13,39 @@ export interface AccessTokenPayload {
 export type RefreshTokenPayload = AccessTokenPayload
 
 const createAccessToken = ({
+  id,
+  email,
+  businessId,
+  role,
+}: User | RefreshTokenPayload) => {
+  const payload: AccessTokenPayload = {
     id,
     email,
     businessId,
     role,
-}: User | RefreshTokenPayload) => {
-    const payload: AccessTokenPayload = {
-        id,
-        email,
-        businessId,
-        role,
-    }
-    const secret = process.env.REFRESH_TOKEN_SECRET!
-    const options = { expiresIn: tokenExpirationLimits.accessToken }
+  }
+  const secret = process.env.REFRESH_TOKEN_SECRET!
+  const options = { expiresIn: tokenExpirationLimits.accessToken }
 
-    return jwt.sign(payload, secret, options) as Scalars['JWT']
+  return jwt.sign(payload, secret, options) as Scalars['JWT']
 }
 
 const createRefreshToken = ({
+  id,
+  email,
+  businessId,
+  role,
+}: User | RefreshTokenPayload) => {
+  const payload: RefreshTokenPayload = {
     id,
     email,
     businessId,
     role,
-}: User | RefreshTokenPayload) => {
-    const payload: RefreshTokenPayload = {
-        id,
-        email,
-        businessId,
-        role,
-    }
-    const secret = process.env.REFRESH_TOKEN_SECRET!
-    const options = { expiresIn: tokenExpirationLimits.refreshToken }
+  }
+  const secret = process.env.REFRESH_TOKEN_SECRET!
+  const options = { expiresIn: tokenExpirationLimits.refreshToken }
 
-    return jwt.sign(payload, secret, options) as Scalars['JWT']
+  return jwt.sign(payload, secret, options) as Scalars['JWT']
 }
 
 export type LoginTokens = {
@@ -54,10 +54,10 @@ export type LoginTokens = {
 }
 
 const createLoginTokens: (user: User | RefreshTokenPayload) => LoginTokens = (
-    user
+  user,
 ) => ({
-    refreshToken: createRefreshToken(user),
-    accessToken: createAccessToken(user),
+  refreshToken: createRefreshToken(user),
+  accessToken: createAccessToken(user),
 })
 
 export { createLoginTokens }

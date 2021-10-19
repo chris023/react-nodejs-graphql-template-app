@@ -1,7 +1,6 @@
 import { ContextFunction } from 'apollo-server-core'
-
-import { models, Models, UserAttributes } from 'models'
 import { createLoaders, Loaders } from 'loaders'
+import { Models, models, UserAttributes } from 'models'
 
 import { getUser } from './helpers'
 
@@ -12,14 +11,14 @@ export interface Context {
 }
 
 const context: ContextFunction<any, Context> = async ({ req }) => {
-    const user = await getUser(req)
-    const loaders = createLoaders()
+  const user = await getUser(req)
+  const loaders = createLoaders()
 
-    return {
-        user,
-        models,
-        loaders,
-    }
+  return {
+    user,
+    models,
+    loaders,
+  }
 }
 
 export { context }

@@ -6,9 +6,6 @@ import { authDirectiveTransformer } from './auth'
 const transformers = [authDirectiveTransformer]
 
 /** Injects custom directives into a given schema */
-const injectDirectives = (baseSchema: GraphQLSchema) =>
-    transformers.reduce((schema, transformerFn) => {
-        return transformerFn(schema)
-    }, baseSchema)
+const injectDirectives = (baseSchema: GraphQLSchema) => transformers.reduce((schema, transformerFn) => transformerFn(schema), baseSchema)
 
 export { injectDirectives }

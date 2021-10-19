@@ -9,8 +9,9 @@ module.exports = {
         ecmaVersion: 13,
         sourceType: 'module',
     },
-    plugins: ['@typescript-eslint, simple-import-sort'],
+    plugins: ['@typescript-eslint', 'simple-import-sort'],
     rules: {
+        semi: ['error', 'never'],
         'simple-import-sort/imports': 'error',
         'simple-import-sort/exports': 'error',
         'import/first': 'error',

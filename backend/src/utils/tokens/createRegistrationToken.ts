@@ -1,6 +1,6 @@
-import { tokenExpirationLimits } from 'utils'
 import jwt from 'jsonwebtoken'
 import { Role, Scalars } from 'types'
+import { tokenExpirationLimits } from 'utils'
 
 export interface RegistrationTokenPayload {
     businessId: Scalars['ID']
@@ -11,11 +11,11 @@ export interface RegistrationTokenPayload {
 const createRegistrationToken: (
     payload: RegistrationTokenPayload
 ) => Scalars['JWT'] = ({ businessId, email, role }) => {
-    const payload = { businessId, email, role }
-    const secret = process.env.SIGNUP_TOKEN_SECRET!
-    const options = { expiresIn: tokenExpirationLimits.registrationToken }
+  const payload = { businessId, email, role }
+  const secret = process.env.SIGNUP_TOKEN_SECRET!
+  const options = { expiresIn: tokenExpirationLimits.registrationToken }
 
-    return jwt.sign(payload, secret, options)
+  return jwt.sign(payload, secret, options)
 }
 
 export { createRegistrationToken }

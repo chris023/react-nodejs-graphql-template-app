@@ -8,6 +8,7 @@
         "develop": "concurrently 'npm:develop:*'",
         "develop:codegen": "cross-env NODE_PATH=./src graphql-codegen --watch",
         "develop:server": "cross-env NODE_PATH=./src ts-node-dev --rs src/index.ts",
+        "eslint": "eslint --fix --ext .ts,.tsx .",
         "pre-start": "codegen",
         "start": "concurrently 'start:develop:*'",
         "start:codegen": "cross-env NODE_PATH=./src graphql-codegen ",

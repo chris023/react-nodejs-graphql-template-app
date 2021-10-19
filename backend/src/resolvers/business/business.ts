@@ -6,9 +6,9 @@ interface Args {
 }
 
 const business: IFieldResolver<undefined, Context, Args> = async (
-    _parent,
-    { id },
-    { models }
+  _parent,
+  { id },
+  { models },
 ) => await models.Business.findByPk(id)
 
 export { business }

@@ -7,9 +7,9 @@ interface Args {
 }
 
 const updateBusiness: IFieldResolver<undefined, Context, Args> = async (
-    _parent,
-    { id, ...businessFields },
-    { models }
+  _parent,
+  { id, ...businessFields },
+  { models },
 ) => await models.Business.update(businessFields, { where: { id } })
 
 export { updateBusiness }

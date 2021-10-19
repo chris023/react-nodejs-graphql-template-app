@@ -1,7 +1,7 @@
 import { resolvers as graphqlScalarsResolvers } from 'graphql-scalars'
 
 const customScalars = {
-    ...graphqlScalarsResolvers,
+  ...graphqlScalarsResolvers,
 }
 
 export { customScalars }

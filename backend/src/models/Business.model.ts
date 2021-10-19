@@ -1,5 +1,7 @@
-import { Table, Column, Model, HasMany, PrimaryKey } from 'sequelize-typescript'
 import { Optional } from 'sequelize/types'
+import {
+  Column, HasMany, Model, PrimaryKey, Table,
+} from 'sequelize-typescript'
 
 import { User } from './User.model'
 
