@@ -1,16 +1,10 @@
-import { Context } from 'context'
-import { IFieldResolver } from 'graphql-resolvers'
+import { MutationResolvers } from 'types'
 
-interface Args {
-    id: string
-}
-
-const deleteUser: IFieldResolver<
-    undefined,
-    Context,
-    Args,
-    Promise<number>
-> = async (_parent, { id }, { models }) => {
+const deleteUser: MutationResolvers['deleteUser'] = async (
+    _parent,
+    { id },
+    { models }
+) => {
     return await models.User.destroy({
         where: { id },
     })

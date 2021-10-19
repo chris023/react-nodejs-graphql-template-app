@@ -7,13 +7,16 @@ import {
     PrimaryKey,
 } from 'sequelize-typescript'
 import { Optional } from 'sequelize/types'
-import { Role } from 'types'
+import { Role, ResolversTypes } from 'types'
 
 import { Business } from './Business.model'
 
 export interface UserAttributes {
-    id: string
-    name: string
+    id: ResolversTypes['UUID']
+    firstName: string
+    lastName: string
+    email: ResolversTypes['EmailAddress']
+    role: Role
 }
 
 export interface UserCreationAttributes

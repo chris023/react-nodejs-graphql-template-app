@@ -1,9 +1,10 @@
 import { getDirective, MapperKind, mapSchema } from '@graphql-tools/utils'
 import { defaultFieldResolver, GraphQLSchema } from 'graphql'
 import { gql } from 'graphql-tag'
+import { Role } from 'types'
 
 /** All roles that can be assigned to a system user in order of increasing permissions */
-export const roles = ['user', 'admin', 'superadmin']
+export const roles: Role[] = [Role.User, Role.Admin, Role.SiteAdmin]
 
 const typeDirectiveArgumentMaps: Record<string, any> = {}
 
@@ -57,7 +58,7 @@ export const authDirectiveTransformer = (schema: GraphQLSchema) =>
     })
 
 /** Helper to compare user's given role to defined list of roles */
-const hasRole = (user: any, requiredRole: string) => {
+const hasRole = (user: any, requiredRole: Role) => {
     const userRoleLevel = roles.indexOf(user.role)
     const requiredRoleLevel = roles.indexOf(requiredRole)
 

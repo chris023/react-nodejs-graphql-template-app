@@ -6,15 +6,15 @@ export default gql`
         register(email: EmailAddress!, password: String!): LoginResponse!
 
         refreshTokens(refreshToken: String!): AuthTokens!
+    }
 
-        type LoginResponse {
-            user: User!
-            tokens: AuthTokens!
-        }
-
-        type AuthTokens {
+    type AuthTokens {
         accessToken: JWT!
         refreshToken: JWT!
     }
+
+    type LoginResponse {
+        user: User!
+        tokens: AuthTokens!
     }
 `

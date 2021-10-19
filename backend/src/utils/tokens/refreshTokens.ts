@@ -1,8 +1,9 @@
-import { JsonWebToken, RefreshTokenPayload } from 'utils'
+import { RefreshTokenPayload } from 'utils'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { createLoginTokens } from './createLoginTokens'
+import { Scalars } from 'types'
 
-const refreshTokens = (token: JsonWebToken) => {
+const refreshTokens = (token: Scalars['JWT']) => {
     const payload = jwt.verify(
         token,
         process.env.REFRESH_TOKEN_SECRET!

@@ -1,12 +1,6 @@
-import { Context } from 'context'
-import { IFieldResolver } from 'graphql-resolvers'
-import { Business } from 'models/Business.model'
+import { BusinessResolvers } from 'types'
 
-const users: IFieldResolver<Business, Context> = async (
-    { id },
-    _args,
-    { models }
-) =>
+const users: BusinessResolvers['users'] = async ({ id }, _args, { models }) =>
     await models.User.findAll({
         where: {
             businessId: id,

@@ -1,14 +1,7 @@
-import { AuthenticationError } from 'apollo-server-errors'
-import { Context } from 'context'
-import { IFieldResolver } from 'graphql-resolvers'
-import { User } from 'models/User.model'
+import { QueryResolvers } from 'types'
 
-const getSelf: IFieldResolver<
-    undefined,
-    Context,
-    Promise<User | null>
-> = async (_parent, _args, { user }) => {
-    user
+const getSelf: QueryResolvers['getSelf'] = async (_parent, _args, { user }) => {
+    return user
 }
 
 export { getSelf }

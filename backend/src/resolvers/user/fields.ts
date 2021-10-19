@@ -1,11 +1,9 @@
-import { Context } from 'context'
-import { IFieldResolver } from 'graphql-resolvers'
-import { User } from 'models/User.model'
+import { UserResolvers } from 'types'
 
-const business: IFieldResolver<User, Context, undefined> = async (
-    { businessId },
+const business: UserResolvers['business'] = async (
+    _parent,
     _args,
-    { models }
+    { models, user: { businessId } }
 ) => await models.Business.findByPk(businessId)
 
 export { business }

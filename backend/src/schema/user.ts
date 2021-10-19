@@ -8,6 +8,11 @@ export default gql`
 
     extend type Mutation {
         deleteUser(id: UUID!): Boolean! @auth(requires: siteAdmin)
-        updateUser(id: UUID!, email: String, timezone: String): User! @auth(requires(:siteAdmin))
+        updateUser(
+            id: UUID!
+            email: EmailAddress
+            firstName: String
+            lastName: String
+        ): User! @auth(requires: siteAdmin)
     }
 `

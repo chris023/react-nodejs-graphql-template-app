@@ -1,22 +1,24 @@
 import { makeExecutableSchema } from '@graphql-tools/schema'
 import { typeDefs as graphqlScalarsTypeDefs } from 'graphql-scalars'
 
-import { authDirectiveTypeDefs, injectDirectives } from 'directives'
-import * as resolvers from 'resolvers'
+import { directiveTypeDefs, injectDirectives } from 'directives'
+import { resolvers } from 'resolvers'
 
 import { baseDefs } from './baseDefs'
 
 import authenticationDefs from './authentication'
 import businessDefs from './business'
+import selfDefs from './self'
 import userDefs from './user'
 
 /** This allows the schema typedefs to be stitched together */
 const typeDefs = [
     ...graphqlScalarsTypeDefs,
-    authDirectiveTypeDefs,
+    ...directiveTypeDefs,
     baseDefs,
     authenticationDefs,
     businessDefs,
+    selfDefs,
     userDefs,
 ]
 
