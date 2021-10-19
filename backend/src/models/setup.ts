@@ -23,6 +23,8 @@ if (
         host: process.env.DATABASE_URL,
         dialect: 'postgres',
         models: [__dirname + '/**/*.model.ts'],
+        modelMatch: (filename, member) =>
+            filename.split('.')[0].toLowerCase() === member.toLowerCase(),
     })
 } else {
     throw new Error('Missing database environment variables')

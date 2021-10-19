@@ -16,8 +16,8 @@ export class Business extends Model<
     BusinessAttributes,
     BusinessCreationAttributes
 > {
-    @Column
     @PrimaryKey
+    @Column
     id!: string
 
     @Column

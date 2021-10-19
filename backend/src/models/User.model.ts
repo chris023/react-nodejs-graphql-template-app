@@ -24,8 +24,8 @@ export interface UserCreationAttributes
 
 @Table
 export class User extends Model<UserAttributes, UserCreationAttributes> {
-    @Column
     @PrimaryKey
+    @Column
     id!: string
 
     @Column
