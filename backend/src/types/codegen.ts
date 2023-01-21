@@ -1,10 +1,11 @@
 /**** THIS FILE IS GENERATED, DO NOT EDIT! ****/
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-export type RequireFields<T, K extends keyof T> = { [X in Exclude<keyof T, K>]?: T[X] } & { [P in K]-?: NonNullable<T[P]> };
+export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -12,9 +13,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  AccountNumber: any;
   BigInt: any;
   Byte: any;
+  CountryCode: any;
+  Cuid: any;
   Currency: any;
+  DID: any;
   Date: any;
   DateTime: any;
   Duration: any;
@@ -25,6 +30,7 @@ export type Scalars = {
   HexColorCode: any;
   Hexadecimal: any;
   IBAN: any;
+  IP: any;
   IPv4: any;
   IPv6: any;
   ISBN: any;
@@ -36,6 +42,7 @@ export type Scalars = {
   LocalDate: any;
   LocalEndTime: any;
   LocalTime: any;
+  Locale: any;
   Long: any;
   Longitude: any;
   MAC: any;
@@ -54,8 +61,11 @@ export type Scalars = {
   PostalCode: any;
   RGB: any;
   RGBA: any;
+  RoutingNumber: any;
   SafeInt: any;
+  SemVer: any;
   Time: any;
+  TimeZone: any;
   Timestamp: any;
   URL: any;
   USCurrency: any;
@@ -139,16 +149,16 @@ export type MutationUpdateBusinessArgs = {
 
 
 export type MutationUpdateSelfArgs = {
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
+  firstName?: InputMaybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
 };
 
 
 export type MutationUpdateUserArgs = {
-  email?: Maybe<Scalars['EmailAddress']>;
-  firstName?: Maybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['EmailAddress']>;
+  firstName?: InputMaybe<Scalars['String']>;
   id: Scalars['UUID'];
-  lastName?: Maybe<Scalars['String']>;
+  lastName?: InputMaybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -214,7 +224,7 @@ export type SubscriptionSubscribeFn<TResult, TParent, TContext, TArgs> = (
   args: TArgs,
   context: TContext,
   info: GraphQLResolveInfo
-) => AsyncIterator<TResult> | Promise<AsyncIterator<TResult>>;
+) => AsyncIterable<TResult> | Promise<AsyncIterable<TResult>>;
 
 export type SubscriptionResolveFn<TResult, TParent, TContext, TArgs> = (
   parent: TParent,
@@ -261,12 +271,16 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AccountNumber: ResolverTypeWrapper<Scalars['AccountNumber']>;
   AuthTokens: ResolverTypeWrapper<AuthTokens>;
   BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   Business: ResolverTypeWrapper<Business>;
   Byte: ResolverTypeWrapper<Scalars['Byte']>;
+  CountryCode: ResolverTypeWrapper<Scalars['CountryCode']>;
+  Cuid: ResolverTypeWrapper<Scalars['Cuid']>;
   Currency: ResolverTypeWrapper<Scalars['Currency']>;
+  DID: ResolverTypeWrapper<Scalars['DID']>;
   Date: ResolverTypeWrapper<Scalars['Date']>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
   Duration: ResolverTypeWrapper<Scalars['Duration']>;
@@ -277,6 +291,7 @@ export type ResolversTypes = {
   HexColorCode: ResolverTypeWrapper<Scalars['HexColorCode']>;
   Hexadecimal: ResolverTypeWrapper<Scalars['Hexadecimal']>;
   IBAN: ResolverTypeWrapper<Scalars['IBAN']>;
+  IP: ResolverTypeWrapper<Scalars['IP']>;
   IPv4: ResolverTypeWrapper<Scalars['IPv4']>;
   IPv6: ResolverTypeWrapper<Scalars['IPv6']>;
   ISBN: ResolverTypeWrapper<Scalars['ISBN']>;
@@ -288,6 +303,7 @@ export type ResolversTypes = {
   LocalDate: ResolverTypeWrapper<Scalars['LocalDate']>;
   LocalEndTime: ResolverTypeWrapper<Scalars['LocalEndTime']>;
   LocalTime: ResolverTypeWrapper<Scalars['LocalTime']>;
+  Locale: ResolverTypeWrapper<Scalars['Locale']>;
   LoginResponse: ResolverTypeWrapper<LoginResponse>;
   Long: ResolverTypeWrapper<Scalars['Long']>;
   Longitude: ResolverTypeWrapper<Scalars['Longitude']>;
@@ -310,10 +326,13 @@ export type ResolversTypes = {
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
   Role: Role;
+  RoutingNumber: ResolverTypeWrapper<Scalars['RoutingNumber']>;
   SafeInt: ResolverTypeWrapper<Scalars['SafeInt']>;
+  SemVer: ResolverTypeWrapper<Scalars['SemVer']>;
   String: ResolverTypeWrapper<Scalars['String']>;
   Subscription: ResolverTypeWrapper<{}>;
   Time: ResolverTypeWrapper<Scalars['Time']>;
+  TimeZone: ResolverTypeWrapper<Scalars['TimeZone']>;
   Timestamp: ResolverTypeWrapper<Scalars['Timestamp']>;
   URL: ResolverTypeWrapper<Scalars['URL']>;
   USCurrency: ResolverTypeWrapper<Scalars['USCurrency']>;
@@ -327,12 +346,16 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AccountNumber: Scalars['AccountNumber'];
   AuthTokens: AuthTokens;
   BigInt: Scalars['BigInt'];
   Boolean: Scalars['Boolean'];
   Business: Business;
   Byte: Scalars['Byte'];
+  CountryCode: Scalars['CountryCode'];
+  Cuid: Scalars['Cuid'];
   Currency: Scalars['Currency'];
+  DID: Scalars['DID'];
   Date: Scalars['Date'];
   DateTime: Scalars['DateTime'];
   Duration: Scalars['Duration'];
@@ -343,6 +366,7 @@ export type ResolversParentTypes = {
   HexColorCode: Scalars['HexColorCode'];
   Hexadecimal: Scalars['Hexadecimal'];
   IBAN: Scalars['IBAN'];
+  IP: Scalars['IP'];
   IPv4: Scalars['IPv4'];
   IPv6: Scalars['IPv6'];
   ISBN: Scalars['ISBN'];
@@ -354,6 +378,7 @@ export type ResolversParentTypes = {
   LocalDate: Scalars['LocalDate'];
   LocalEndTime: Scalars['LocalEndTime'];
   LocalTime: Scalars['LocalTime'];
+  Locale: Scalars['Locale'];
   LoginResponse: LoginResponse;
   Long: Scalars['Long'];
   Longitude: Scalars['Longitude'];
@@ -375,10 +400,13 @@ export type ResolversParentTypes = {
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
+  RoutingNumber: Scalars['RoutingNumber'];
   SafeInt: Scalars['SafeInt'];
+  SemVer: Scalars['SemVer'];
   String: Scalars['String'];
   Subscription: {};
   Time: Scalars['Time'];
+  TimeZone: Scalars['TimeZone'];
   Timestamp: Scalars['Timestamp'];
   URL: Scalars['URL'];
   USCurrency: Scalars['USCurrency'];
@@ -395,6 +423,10 @@ export type AuthDirectiveArgs = {
 };
 
 export type AuthDirectiveResolver<Result, Parent, ContextType = any, Args = AuthDirectiveArgs> = DirectiveResolverFn<Result, Parent, ContextType, Args>;
+
+export interface AccountNumberScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['AccountNumber'], any> {
+  name: 'AccountNumber';
+}
 
 export type AuthTokensResolvers<ContextType = any, ParentType extends ResolversParentTypes['AuthTokens'] = ResolversParentTypes['AuthTokens']> = {
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
@@ -417,8 +449,20 @@ export interface ByteScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Byte';
 }
 
+export interface CountryCodeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['CountryCode'], any> {
+  name: 'CountryCode';
+}
+
+export interface CuidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Cuid'], any> {
+  name: 'Cuid';
+}
+
 export interface CurrencyScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Currency'], any> {
   name: 'Currency';
+}
+
+export interface DidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['DID'], any> {
+  name: 'DID';
 }
 
 export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Date'], any> {
@@ -459,6 +503,10 @@ export interface HexadecimalScalarConfig extends GraphQLScalarTypeConfig<Resolve
 
 export interface IbanScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IBAN'], any> {
   name: 'IBAN';
+}
+
+export interface IpScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IP'], any> {
+  name: 'IP';
 }
 
 export interface IPv4ScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['IPv4'], any> {
@@ -505,6 +553,10 @@ export interface LocalTimeScalarConfig extends GraphQLScalarTypeConfig<Resolvers
   name: 'LocalTime';
 }
 
+export interface LocaleScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Locale'], any> {
+  name: 'Locale';
+}
+
 export type LoginResponseResolvers<ContextType = any, ParentType extends ResolversParentTypes['LoginResponse'] = ResolversParentTypes['LoginResponse']> = {
   tokens?: Resolver<ResolversTypes['AuthTokens'], ParentType, ContextType>;
   user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
@@ -532,7 +584,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
   refreshTokens?: Resolver<ResolversTypes['AuthTokens'], ParentType, ContextType, RequireFields<MutationRefreshTokensArgs, 'refreshToken'>>;
   register?: Resolver<ResolversTypes['LoginResponse'], ParentType, ContextType, RequireFields<MutationRegisterArgs, 'email' | 'password'>>;
   updateBusiness?: Resolver<ResolversTypes['Business'], ParentType, ContextType, RequireFields<MutationUpdateBusinessArgs, 'name'>>;
-  updateSelf?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateSelfArgs, never>>;
+  updateSelf?: Resolver<ResolversTypes['User'], ParentType, ContextType, Partial<MutationUpdateSelfArgs>>;
   updateUser?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationUpdateUserArgs, 'id'>>;
 };
 
@@ -605,8 +657,16 @@ export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'RGBA';
 }
 
+export interface RoutingNumberScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['RoutingNumber'], any> {
+  name: 'RoutingNumber';
+}
+
 export interface SafeIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['SafeInt'], any> {
   name: 'SafeInt';
+}
+
+export interface SemVerScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['SemVer'], any> {
+  name: 'SemVer';
 }
 
 export type SubscriptionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Subscription'] = ResolversParentTypes['Subscription']> = {
@@ -615,6 +675,10 @@ export type SubscriptionResolvers<ContextType = any, ParentType extends Resolver
 
 export interface TimeScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Time'], any> {
   name: 'Time';
+}
+
+export interface TimeZoneScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['TimeZone'], any> {
+  name: 'TimeZone';
 }
 
 export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['Timestamp'], any> {
@@ -660,11 +724,15 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type Resolvers<ContextType = any> = {
+  AccountNumber?: GraphQLScalarType;
   AuthTokens?: AuthTokensResolvers<ContextType>;
   BigInt?: GraphQLScalarType;
   Business?: BusinessResolvers<ContextType>;
   Byte?: GraphQLScalarType;
+  CountryCode?: GraphQLScalarType;
+  Cuid?: GraphQLScalarType;
   Currency?: GraphQLScalarType;
+  DID?: GraphQLScalarType;
   Date?: GraphQLScalarType;
   DateTime?: GraphQLScalarType;
   Duration?: GraphQLScalarType;
@@ -675,6 +743,7 @@ export type Resolvers<ContextType = any> = {
   HexColorCode?: GraphQLScalarType;
   Hexadecimal?: GraphQLScalarType;
   IBAN?: GraphQLScalarType;
+  IP?: GraphQLScalarType;
   IPv4?: GraphQLScalarType;
   IPv6?: GraphQLScalarType;
   ISBN?: GraphQLScalarType;
@@ -686,6 +755,7 @@ export type Resolvers<ContextType = any> = {
   LocalDate?: GraphQLScalarType;
   LocalEndTime?: GraphQLScalarType;
   LocalTime?: GraphQLScalarType;
+  Locale?: GraphQLScalarType;
   LoginResponse?: LoginResponseResolvers<ContextType>;
   Long?: GraphQLScalarType;
   Longitude?: GraphQLScalarType;
@@ -707,9 +777,12 @@ export type Resolvers<ContextType = any> = {
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;
+  RoutingNumber?: GraphQLScalarType;
   SafeInt?: GraphQLScalarType;
+  SemVer?: GraphQLScalarType;
   Subscription?: SubscriptionResolvers<ContextType>;
   Time?: GraphQLScalarType;
+  TimeZone?: GraphQLScalarType;
   Timestamp?: GraphQLScalarType;
   URL?: GraphQLScalarType;
   USCurrency?: GraphQLScalarType;
